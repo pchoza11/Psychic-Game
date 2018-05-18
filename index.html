@@ -1,0 +1,98 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Psychic Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/style.css" />
+    <script src="assets/javascript/game.js"></script>
+</head>
+<body>
+    <h1>The Psychic Game</h1>
+
+    <p>Guess what letter I am thinking of</p>
+
+    <div id="game">
+        <p>You chose: <span id="user-choice"></span></p>
+        <p>Computer chose: <span id="comp-choice"></span></p>
+        <p>Wins: <span id="wins"></span></p>
+        <p>Losses: <span id="losses"></span></p>
+        <p>Guesses Left: <span id="left"></span></p>
+        <p>Your Guesses so far: <span id="guesses"></span></p>        
+
+
+     </div>
+
+     <script type="text/javascript">
+
+        var userGuess;
+        var computerGuess;
+        var wins = 0;
+        var losses = 0;
+        var guessesLeft = 12;
+        var guessesSoFar = [];
+        
+        var userSpan = document.getElementById("user-choice");
+        var compSpan = document.getElementById("comp-choice"); 
+        var winSpan = document.getElementById("wins");
+        var lossesSpan = document.getElementById("losses");
+        var leftSpan = document.getElementById("left");
+        var guessesSpan = document.getElementById("guesses");
+
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
+        
+        document.onkeyup = function(event) {
+
+            // Determines which key was pressed.
+            var userGuess = event.key;
+
+            // Randomly chooses a choice from the options array. This is the Computer's guess.
+            var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+            // Alerts the key the user pressed (userGuess).
+            //alert("User guess: " + userGuess);
+
+            // Alerts the Computer's guess.
+            //alert("Computer guess: " + computerGuess);
+            
+            if ( guessesLeft < 1 ) {
+                guessesLeft = 12;
+            }
+
+            if (userGuess === computerGuess) {
+            wins++;
+            winSpan.textContent = wins;
+            userSpan.textContent = userGuess;
+            compSpan.textContent = computerGuess;        
+            console.log("wins " + wins);
+            }
+
+            else {
+            guessesLeft--;
+            leftSpan.textContent = guessesLeft;
+            userSpan.textContent = userGuess;        
+            console.log("left " + guessesLeft);
+            }
+
+            if (guessesLeft === 0) {
+            losses++;
+            lossesSpan.textContent = losses;
+            userSpan.textContent = userGuess;
+            compSpan.textContent = computerGuess;        
+            console.log("losses " + losses);
+            }
+
+    
+        };
+     
+
+     
+     </script>
+
+     
+
+
+    
+</body>
+</html>
